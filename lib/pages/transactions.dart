@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -65,50 +63,58 @@ class TransactionsPageState extends State<TransactionsPage> {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 200,
-              height: 50,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    )
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,              
+                children: [
+                  SizedBox(
+                    width: 130,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          )
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text("Hoy")
+                    ),
                   ),
-                ),
-                onPressed: () {},
-                child: const Text("Hoy")
-              ),
-            ),
-            // space
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: 200,
-              height: 50,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    )
+                  // space
+                  const SizedBox(
+                    width: 15,
                   ),
-                ),
-                onPressed: () async {
-                  await _selectStartDate(context);
-                  await _selectEndDate(context);
-                  // Handle date range selection
-                },
-                child: const Text('Rango de fechas'),
+                  SizedBox(
+                    width: 180,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          )
+                        ),
+                      ),
+                      onPressed: () async {
+                        await _selectStartDate(context);
+                        await _selectEndDate(context);
+                        // Handle date range selection
+                      },
+                      child: const Text('Rango de fechas'),
+                    ),
+                  ),
+                  //Text('Start Date: ${startDate != null ? formatter.format(startDate!) : 'Not selected'}'),
+                  //Text('End Date: ${endDate != null ? formatter.format(endDate!) : 'Not selected'}'),
+                ],
               ),
-            ),
-            //Text('Start Date: ${startDate != null ? formatter.format(startDate!) : 'Not selected'}'),
-            //Text('End Date: ${endDate != null ? formatter.format(endDate!) : 'Not selected'}'),
-          ],
+            ],
+          ),
         ),
       ),
     );
