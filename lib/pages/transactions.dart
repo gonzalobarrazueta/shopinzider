@@ -71,7 +71,7 @@ class TransactionsPageState extends State<TransactionsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,              
                 children: [
-                  SizedBox(
+                  SizedBox(                
                     width: 130,
                     height: 50,
                     child: ElevatedButton(
@@ -81,9 +81,18 @@ class TransactionsPageState extends State<TransactionsPage> {
                             borderRadius: BorderRadius.circular(5),
                           )
                         ),
+                        backgroundColor: const WidgetStatePropertyAll(
+                          Color(0xFF78E1CA)
+                        )
                       ),
                       onPressed: () {},
-                      child: const Text("Hoy")
+                      child: const Text(
+                        "Hoy",
+                        style: TextStyle(
+                          color: Color(0xFF000000),
+                          fontFamily: 'Roboto',
+                        ),
+                      )
                     ),
                   ),
                   // space
@@ -100,13 +109,22 @@ class TransactionsPageState extends State<TransactionsPage> {
                             borderRadius: BorderRadius.circular(5),
                           )
                         ),
+                        backgroundColor: const WidgetStatePropertyAll(
+                          Color(0xFF78E1CA)
+                        )
                       ),
                       onPressed: () async {
                         await _selectStartDate(context);
                         await _selectEndDate(context);
                         // Handle date range selection
                       },
-                      child: const Text('Rango de fechas'),
+                      child: const Text(
+                        'Rango de fechas',
+                        style: TextStyle(
+                          color: Color(0xFF000000),
+                          fontFamily: 'Roboto',
+                        ),
+                      )
                     ),
                   ),
                   //Text('Start Date: ${startDate != null ? formatter.format(startDate!) : 'Not selected'}'),
