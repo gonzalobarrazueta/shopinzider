@@ -22,18 +22,13 @@ class TransactionsPerDay extends StatelessWidget {
     String formattedDate = dateFormat.format(date);
 
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9, // 90% of screen width
       decoration: BoxDecoration(
         color: Colors.white, // Background color for the box
         borderRadius: BorderRadius.circular(10), // Rounded corners
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: Offset(0, 3), // Shadow position
-          ),
-        ],
+        border: Border.all(
+          color: Colors.grey.shade300, // Border color
+          width: 1, // Border width
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
