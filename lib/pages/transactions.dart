@@ -128,9 +128,18 @@ class TransactionsPageState extends State<TransactionsPage> {
                     ),
                   ),
                   //Text('Start Date: ${startDate != null ? formatter.format(startDate!) : 'Not selected'}'),
-                  //Text('End Date: ${endDate != null ? formatter.format(endDate!) : 'Not selected'}'),
+                  //Text('End Date: ${endDate != null ? formatter.format(endDate!) : 'Not selected'}'),              
                 ],
               ),
+              Expanded(
+                child: Center(
+                  child: Icon(
+                    Icons.insert_chart,
+                    size: 80,
+                    color: Colors.grey.shade200,
+                  )
+                )
+              )
             ],
           ),
         ),
