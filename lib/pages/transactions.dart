@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shop_inzider/widgets/transactions_per_day.dart';
 
 class TransactionsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => TransactionsPageState();
 }
-
 
 class TransactionsPageState extends State<TransactionsPage> {
   DateTime? startDate;
@@ -41,8 +41,24 @@ class TransactionsPageState extends State<TransactionsPage> {
     }
   }
 
+
+  List<DateTime> _getDateRange(DateTime start, DateTime end) {
+    List<DateTime> dateRange = [];
+    DateTime current = start;
+    while (current.isBefore(end) || current.isAtSameMomentAs(end)) {
+      dateRange.add(current);
+      current = current.add(Duration(days: 1));
+    }
+    return dateRange;
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    List<DateTime> dateRange = (startDate != null && endDate != null)
+        ? _getDateRange(startDate!, endDate!)
+        : [];
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -126,19 +142,47 @@ class TransactionsPageState extends State<TransactionsPage> {
                         ),
                       )
                     ),
-                  ),
-                  //Text('Start Date: ${startDate != null ? formatter.format(startDate!) : 'Not selected'}'),
-                  //Text('End Date: ${endDate != null ? formatter.format(endDate!) : 'Not selected'}'),              
+                  )   
                 ],
               ),
-              Expanded(
-                child: Center(
-                  child: Icon(
-                    Icons.insert_chart,
-                    size: 80,
-                    color: Colors.grey.shade200,
+              const SizedBox(                
+                height: 20,
+              ),
+              Expanded(              
+                child: (dateRange.isEmpty) 
+                ? Center(
+                    child: Icon(
+                      Icons.insert_chart,
+                      size: 80,
+                      color: Colors.grey.shade200,
+                    )
                   )
-                )
+                : LayoutBuilder(
+                    builder: (context, constraints) {
+                      double containerWidth = constraints.maxWidth * 0.9;
+                      return SingleChildScrollView(
+                        child: Container(
+                          width: containerWidth,
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            children: dateRange.map((date) {
+                              return Column(
+                                children: [
+                                  TransactionsPerDay(
+                                    date: date,
+                                    lote: 'TEST-0001',
+                                    monto: '100.00',
+                                    terminal: 'Terminal 1',
+                                  ),
+                                  const SizedBox(height: 15)
+                                ],
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      );
+                    }
+                ),
               )
             ],
           ),
