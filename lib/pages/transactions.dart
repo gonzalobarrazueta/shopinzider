@@ -84,66 +84,69 @@ class TransactionsPageState extends State<TransactionsPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,              
-                children: [
-                  SizedBox(                
-                    width: 130,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape: WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,              
+                  children: [
+                    SizedBox(                
+                      width: 130,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape: WidgetStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            )
+                          ),
+                          backgroundColor: const WidgetStatePropertyAll(
+                            Color(0xFF78E1CA)
                           )
                         ),
-                        backgroundColor: const WidgetStatePropertyAll(
-                          Color(0xFF78E1CA)
+                        onPressed: () {},
+                        child: const Text(
+                          "Hoy",
+                          style: TextStyle(
+                            color: Color(0xFF000000),
+                            fontFamily: 'Roboto',
+                          ),
                         )
                       ),
-                      onPressed: () {},
-                      child: const Text(
-                        "Hoy",
-                        style: TextStyle(
-                          color: Color(0xFF000000),
-                          fontFamily: 'Roboto',
-                        ),
-                      )
                     ),
-                  ),
-                  // space
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  SizedBox(
-                    width: 180,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape: WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                    // space
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    SizedBox(
+                      width: 180,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape: WidgetStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            )
+                          ),
+                          backgroundColor: const WidgetStatePropertyAll(
+                            Color(0xFF78E1CA)
                           )
                         ),
-                        backgroundColor: const WidgetStatePropertyAll(
-                          Color(0xFF78E1CA)
+                        onPressed: () async {
+                          await _selectStartDate(context);
+                          await _selectEndDate(context);
+                          // Handle date range selection
+                        },
+                        child: const Text(
+                          'Rango de fechas',
+                          style: TextStyle(
+                            color: Color(0xFF000000),
+                            fontFamily: 'Roboto',
+                          ),
                         )
                       ),
-                      onPressed: () async {
-                        await _selectStartDate(context);
-                        await _selectEndDate(context);
-                        // Handle date range selection
-                      },
-                      child: const Text(
-                        'Rango de fechas',
-                        style: TextStyle(
-                          color: Color(0xFF000000),
-                          fontFamily: 'Roboto',
-                        ),
-                      )
-                    ),
-                  )   
-                ],
+                    )   
+                  ],
+                ),
               ),
               const SizedBox(                
                 height: 20,
