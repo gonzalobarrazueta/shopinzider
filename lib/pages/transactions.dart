@@ -78,118 +78,159 @@ class TransactionsPageState extends State<TransactionsPage> {
           ),
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,              
-                  children: [
-                    SizedBox(                
-                      width: 130,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: WidgetStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
+      body: Stack(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,              
+                      children: [
+                        SizedBox(                
+                          width: 130,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                )
+                              ),
+                              backgroundColor: const WidgetStatePropertyAll(
+                                Color(0xFF78E1CA)
+                              )
+                            ),
+                            onPressed: () {},
+                            child: const Text(
+                              "Hoy",
+                              style: TextStyle(
+                                color: Color(0xFF000000),
+                                fontFamily: 'Roboto',
+                              ),
                             )
                           ),
-                          backgroundColor: const WidgetStatePropertyAll(
-                            Color(0xFF78E1CA)
-                          )
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          "Hoy",
-                          style: TextStyle(
-                            color: Color(0xFF000000),
-                            fontFamily: 'Roboto',
-                          ),
-                        )
-                      ),
-                    ),
-                    // space
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    SizedBox(
-                      width: 180,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: WidgetStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
+                        // space
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        SizedBox(
+                          width: 180,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                )
+                              ),
+                              backgroundColor: const WidgetStatePropertyAll(
+                                Color(0xFF78E1CA)
+                              )
+                            ),
+                            onPressed: () async {
+                              await _selectStartDate(context);
+                              await _selectEndDate(context);
+                              // Handle date range selection
+                            },
+                            child: const Text(
+                              'Rango de fechas',
+                              style: TextStyle(
+                                color: Color(0xFF000000),
+                                fontFamily: 'Roboto',
+                              ),
                             )
                           ),
-                          backgroundColor: const WidgetStatePropertyAll(
-                            Color(0xFF78E1CA)
-                          )
-                        ),
-                        onPressed: () async {
-                          await _selectStartDate(context);
-                          await _selectEndDate(context);
-                          // Handle date range selection
-                        },
-                        child: const Text(
-                          'Rango de fechas',
-                          style: TextStyle(
-                            color: Color(0xFF000000),
-                            fontFamily: 'Roboto',
-                          ),
+                        )   
+                      ],
+                    ),
+                  ),
+                  const SizedBox(                
+                    height: 20,
+                  ),
+                  Expanded(              
+                    child: (dateRange.isEmpty) 
+                    ? Center(
+                        child: Icon(
+                          Icons.insert_chart,
+                          size: 80,
+                          color: Colors.grey.shade200,
                         )
-                      ),
-                    )   
-                  ],
-                ),
-              ),
-              const SizedBox(                
-                height: 20,
-              ),
-              Expanded(              
-                child: (dateRange.isEmpty) 
-                ? Center(
-                    child: Icon(
-                      Icons.insert_chart,
-                      size: 80,
-                      color: Colors.grey.shade200,
-                    )
+                      )
+                    : LayoutBuilder(
+                        builder: (context, constraints) {
+                          double containerWidth = constraints.maxWidth * 0.9;
+                          return SingleChildScrollView(
+                            child: Container(
+                              width: containerWidth,
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Column(
+                                children: dateRange.map((date) {
+                                  return Column(
+                                    children: [
+                                      TransactionsPerDay(
+                                        date: date,
+                                        lote: 'TEST-0001',
+                                        monto: '100.00',
+                                        terminal: 'Terminal 1',
+                                      ),
+                                      const SizedBox(height: 15)
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        }
+                    ),
                   )
-                : LayoutBuilder(
-                    builder: (context, constraints) {
-                      double containerWidth = constraints.maxWidth * 0.9;
-                      return SingleChildScrollView(
-                        child: Container(
-                          width: containerWidth,
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            children: dateRange.map((date) {
-                              return Column(
-                                children: [
-                                  TransactionsPerDay(
-                                    date: date,
-                                    lote: 'TEST-0001',
-                                    monto: '100.00',
-                                    terminal: 'Terminal 1',
-                                  ),
-                                  const SizedBox(height: 15)
-                                ],
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      );
-                    }
-                ),
-              )
-            ],
+                ],
+              ),
+            ),
           ),
-        ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              color: const Color(0xFFFF4A4A),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.trending_up),
+                      color: const Color(0xFFFFFFFF),
+                      onPressed: () {
+                        // Action for the first button
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.inventory_2),
+                      color: const Color(0xFFFFFFFF),
+                      onPressed: () {
+                        // Action for the second button
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.schedule),
+                      color: const Color(0xFFFFFFFF),
+                      onPressed: () {
+                        // Action for the third button
+                      },
+                    ),
+                  ]
+                )
+              ),
+            )
+          )
+        ],
       ),
     );
   }
