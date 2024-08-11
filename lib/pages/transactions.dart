@@ -201,31 +201,44 @@ class TransactionsPageState extends State<TransactionsPage> {
               color: const Color(0xFFFF4A4A),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Column(
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.trending_up),
-                      color: const Color(0xFFFFFFFF),
-                      onPressed: () {
-                        // Action for the first button
-                      },
+                    const Text(
+                      "Insights AI ⭐",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFFFFFFF),
+                      ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.inventory_2),
-                      color: const Color(0xFFFFFFFF),
-                      onPressed: () {
-                        // Action for the second button
-                      },
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.trending_up),
+                          color: const Color(0xFFFFFFFF),
+                          onPressed: () {
+                            // Action for the first button
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.inventory_2),
+                          color: const Color(0xFFFFFFFF),
+                          onPressed: () {
+                            // Action for the second button
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.schedule),
+                          color: const Color(0xFFFFFFFF),
+                          onPressed: () {
+                            // Action for the third button
+                          },
+                        ),
+                      ]
                     ),
-                    IconButton(
-                      icon: Icon(Icons.schedule),
-                      color: const Color(0xFFFFFFFF),
-                      onPressed: () {
-                        // Action for the third button
-                      },
-                    ),
-                  ]
+                  ],
                 )
               ),
             )
